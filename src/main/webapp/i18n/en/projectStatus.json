@@ -1,0 +1,11 @@
+{
+  "taskFlowApp": {
+    "ProjectStatus": {
+      "null": "",
+      "ACTIVE": "ACTIVE",
+      "COMPLETED": "COMPLETED",
+      "ON_HOLD": "ON_HOLD",
+      "CANCELLED": "CANCELLED"
+    }
+  }
+}

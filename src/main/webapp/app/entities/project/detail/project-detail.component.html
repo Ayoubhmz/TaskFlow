@@ -1,0 +1,60 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (project(); as projectRef) {
+      <div>
+        <h2 data-cy="projectDetailsHeading"><span jhiTranslate="taskFlowApp.project.detail.title">Project</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ projectRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="taskFlowApp.project.name">Name</span></dt>
+          <dd>
+            <span>{{ projectRef.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="taskFlowApp.project.description">Description</span></dt>
+          <dd>
+            <span>{{ projectRef.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="taskFlowApp.project.startDate">Start Date</span></dt>
+          <dd>
+            <span>{{ projectRef.startDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="taskFlowApp.project.endDate">End Date</span></dt>
+          <dd>
+            <span>{{ projectRef.endDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="taskFlowApp.project.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'taskFlowApp.ProjectStatus.' + (projectRef.status ?? 'null')">{{
+              { null: '', ACTIVE: 'ACTIVE', COMPLETED: 'COMPLETED', ON_HOLD: 'ON_HOLD', CANCELLED: 'CANCELLED' }[
+                projectRef.status ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="taskFlowApp.project.user">User</span></dt>
+          <dd>
+            @for (user of projectRef.users; track $index; let last = $last) {
+              <span> {{ user.login }}{{ last ? '' : ', ' }} </span>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/project', projectRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

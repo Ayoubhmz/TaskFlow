@@ -1,0 +1,82 @@
+entity Project {
+  name String required minlength(3),
+  description String maxlength(1000),
+  startDate Instant required,
+  endDate Instant,
+  status ProjectStatus required
+}
+
+entity Task {
+  title String required minlength(3),
+  description String maxlength(1000),
+  status TaskStatus required,
+  priority TaskPriority required,
+  deadline Instant,
+  createdDate Instant required
+}
+
+entity Comment {
+  content String required maxlength(500),
+  timestamp Instant required
+}
+
+entity Notification {
+  message String required maxlength(500),
+  timestamp Instant required,
+  isRead Boolean required
+}
+
+entity UserProfile {
+  fullName String required minlength(3),
+  phoneNumber String,
+  bio String maxlength(500)
+}
+
+enum TaskStatus {
+  TODO,
+  IN_PROGRESS,
+  DONE
+}
+
+enum TaskPriority {
+  LOW,
+  MEDIUM,
+  HIGH
+}
+
+enum ProjectStatus {
+  ACTIVE,
+  COMPLETED,
+  ON_HOLD,
+  CANCELLED
+}
+
+relationship ManyToOne {
+  Task{project(name)} to Project
+}
+
+relationship ManyToOne {
+  Comment{task(title)} to Task
+}
+
+relationship ManyToOne {
+  Notification{user(login)} to User with builtInEntity
+}
+
+relationship ManyToOne {
+  Task{assignedTo(login)} to User with builtInEntity
+}
+
+relationship OneToOne {
+  UserProfile{user(login)} to User with builtInEntity
+}
+
+relationship ManyToMany {
+  Project{user(login)} to User{project(name)} with builtInEntity
+}
+
+paginate Task, Comment, Notification with pagination
+
+dto Project, Task, Comment, Notification, UserProfile with mapstruct
+
+service Project, Task, Comment, Notification, UserProfile with serviceClass

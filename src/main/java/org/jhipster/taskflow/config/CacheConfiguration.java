@@ -50,6 +50,12 @@ public class CacheConfiguration {
             createCache(cm, org.jhipster.taskflow.domain.User.class.getName());
             createCache(cm, org.jhipster.taskflow.domain.Authority.class.getName());
             createCache(cm, org.jhipster.taskflow.domain.User.class.getName() + ".authorities");
+            createCache(cm, org.jhipster.taskflow.domain.Comment.class.getName());
+            createCache(cm, org.jhipster.taskflow.domain.Notification.class.getName());
+            createCache(cm, org.jhipster.taskflow.domain.Project.class.getName());
+            createCache(cm, org.jhipster.taskflow.domain.Project.class.getName() + ".users");
+            createCache(cm, org.jhipster.taskflow.domain.Task.class.getName());
+            createCache(cm, org.jhipster.taskflow.domain.UserProfile.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }
