@@ -42,6 +42,10 @@ export default class NavbarComponent implements OnInit {
     }
   }
 
+  shouldDisplayNavbar(): boolean {
+    return this.router.url !== '/login';
+  }
+
   ngOnInit(): void {
     this.entitiesNavbarItems = EntityNavbarItems;
     this.profileService.getProfileInfo().subscribe(profileInfo => {

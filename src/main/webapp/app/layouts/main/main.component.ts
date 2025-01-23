@@ -7,15 +7,18 @@ import { AccountService } from 'app/core/auth/account.service';
 import { AppPageTitleStrategy } from 'app/app-page-title-strategy';
 import FooterComponent from '../footer/footer.component';
 import PageRibbonComponent from '../profiles/page-ribbon.component';
+import { NgIf } from '@angular/common';
 
 @Component({
   standalone: true,
   selector: 'jhi-main',
   templateUrl: './main.component.html',
   providers: [AppPageTitleStrategy],
-  imports: [RouterOutlet, FooterComponent, PageRibbonComponent],
+  imports: [RouterOutlet, FooterComponent, PageRibbonComponent, NgIf],
 })
 export default class MainComponent implements OnInit {
+  isLoginRoute = false;
+  isRegisterRoute = false;
   private readonly renderer: Renderer2;
 
   private readonly router = inject(Router);
@@ -26,6 +29,11 @@ export default class MainComponent implements OnInit {
 
   constructor() {
     this.renderer = this.rootRenderer.createRenderer(document.querySelector('html'), null);
+    // Subscribe to route changes to check if the current route is '/login'
+    this.router.events.subscribe(() => {
+      this.isLoginRoute = this.router.url === '/login';
+      this.isRegisterRoute = this.router.url === '/account/register';
+    });
   }
 
   ngOnInit(): void {

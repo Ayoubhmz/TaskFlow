@@ -4,7 +4,6 @@ import { Authority } from 'app/config/authority.constants';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
 import { errorRoute } from './layouts/error/error.route';
-
 const routes: Routes = [
   {
     path: '',
@@ -35,7 +34,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    loadChildren: () => import(`./entities/entity.routes`),
+    loadChildren: () => import('./entities/entity.routes'),
   },
   ...errorRoute,
 ];
