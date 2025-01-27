@@ -1,11 +1,15 @@
 <jhi-page-ribbon></jhi-page-ribbon>
 
-<div *ngIf="!isLoginRoute && !isRegisterRoute"><<router-outlet name="navbar"></router-outlet>></div>
+<div *ngIf="!isLoginRoute && !isRegisterRoute && !isResetPasswordRoute && !isResetPasswordFinishRoute && !isResetPasswordChangeRoute">
+  <<router-outlet name="navbar"></router-outlet>>
+</div>
 
 <div class="container-fluid">
   <div class="card jh-card">
     <router-outlet></router-outlet>
   </div>
 
-  <jhi-footer *ngIf="!isLoginRoute && !isRegisterRoute"></jhi-footer>
+  <jhi-footer
+    *ngIf="!isLoginRoute && !isRegisterRoute && !isResetPasswordRoute && !isResetPasswordFinishRoute && !isResetPasswordChangeRoute"
+  ></jhi-footer>
 </div>

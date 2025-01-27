@@ -19,6 +19,9 @@ import { NgIf } from '@angular/common';
 export default class MainComponent implements OnInit {
   isLoginRoute = false;
   isRegisterRoute = false;
+  isResetPasswordRoute = false;
+  isResetPasswordFinishRoute = false;
+  isResetPasswordChangeRoute = false;
   private readonly renderer: Renderer2;
 
   private readonly router = inject(Router);
@@ -29,10 +32,13 @@ export default class MainComponent implements OnInit {
 
   constructor() {
     this.renderer = this.rootRenderer.createRenderer(document.querySelector('html'), null);
-    // Subscribe to route changes to check if the current route is '/login'
+    // Subscribe to route changes to check if the current route is '/'
     this.router.events.subscribe(() => {
       this.isLoginRoute = this.router.url === '/login';
       this.isRegisterRoute = this.router.url === '/account/register';
+      this.isResetPasswordRoute = this.router.url === '/account/reset/request';
+      this.isResetPasswordFinishRoute = this.router.url === '/account/reset/finish';
+      this.isResetPasswordChangeRoute = this.router.url === '/account/password';
     });
   }
 
