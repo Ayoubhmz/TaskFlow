@@ -10,6 +10,7 @@ import { ActivateService } from './activate.service';
   selector: 'jhi-activate',
   imports: [SharedModule, RouterModule],
   templateUrl: './activate.component.html',
+  styleUrls: ['./_authentication.scss'],
 })
 export default class ActivateComponent implements OnInit {
   error = signal(false);

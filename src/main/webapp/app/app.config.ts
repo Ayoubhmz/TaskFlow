@@ -59,3 +59,8 @@ export const appConfig: ApplicationConfig = {
     // jhipster-needle-angular-add-module JHipster will add new module here
   ],
 };
+
+export class DattaConfig {
+  static layout: string = 'vertical';
+  static isCollapseMenu: Boolean = false;
+}
